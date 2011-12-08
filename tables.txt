@@ -1,0 +1,20 @@
+GRADE
+	grade_id
+	name 
+
+PROBLEM
+	problem_id
+	name
+
+STONE
+	stone_id
+	name
+
+COMMENT
+	comment_id
+	problem_id
+	commnet
+	grade_id
+
+	
+
