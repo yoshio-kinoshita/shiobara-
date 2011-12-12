@@ -29,17 +29,20 @@ end
 
 desc "Stop the app server"
 task :stop do
-	m = `netstat -lptn | grep 0.0.0.0:#{port}`.match(/LISTEN\s*(\d+)/)
+	m = `netstat -oan | grep 0.0.0.0:#{port}`.match(/LISTENING\s*(\d+)/)
 	if m
+		puts m
 		pid = m[1].to_i
 		puts "Killing old server #{pid}"
 		kill_process(pid)
+	else
+		puts "Miss"
 	end
 end
 
 task :environment do
 	require 'sequel'
-	DB = Sequel.connect('sqlite://blog.db')
+	DB = Sequel.connect('sqlite://shiobara.db')
 	$LOAD_PATH.unshift(File.dirname(__FILE__) + '/lib')
 	require 'post'
 end
